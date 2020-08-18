@@ -191,16 +191,16 @@ func (poly *Poly) IntersectsPoly(other *Poly) bool {
 		other == nil || other.Exterior == nil {
 		return false
 	}
-	if !ringIntersectsRing(other.Exterior, poly.Exterior, true) {
+	if !ringIntersectsRing(other.Exterior, poly.Exterior, false) {
 		return false
 	}
 	for _, hole := range poly.Holes {
-		if ringContainsRing(hole, other.Exterior, false) {
+		if ringContainsRing(hole, other.Exterior, true) {
 			return false
 		}
 	}
 	for _, hole := range other.Holes {
-		if ringContainsRing(hole, poly.Exterior, false) {
+		if ringContainsRing(hole, poly.Exterior, true) {
 			return false
 		}
 	}
